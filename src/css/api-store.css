@@ -1,0 +1,27 @@
+body {
+  background: #f5f7fb;
+}
+
+.card {
+  border: none;
+  border-radius: 16px;
+}
+
+#catalogo .card {
+  transition: transform 0.2s ease;
+}
+
+#catalogo .card:hover {
+  transform: translateY(-4px);
+}
+
+.carousel-item {
+  text-align: center;
+}
+
+.carousel-caption {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20px;
+  width: 60%;
+}

@@ -1,5 +1,5 @@
 data = {
-    name: "Nombre completo del estudiante",
-    matricula: "Su matrícula sin guiones",
-    url : "su-url-personal-o-de-pagina-publicada"
-}
+    name: "Wander Pérez",
+    matricula: "20240123",
+    url: "http://localhost:3000/"
+};
