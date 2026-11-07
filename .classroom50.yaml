@@ -1,0 +1,12 @@
+schema: "classroom50/repo-config/v1"
+classroom: "programacion-iv"
+assignment: "javascript-conexion-a-api"
+owner:
+  username: "WanderPerez"
+  id: 261702221
+  accepted_at: "2026-11-07T18:13:07Z"
+source:
+  owner: "TDHclassroom"
+  owner_id: 219900396
+  repo: "js-uso-api"
+  branch: "main"
