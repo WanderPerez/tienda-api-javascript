@@ -1,0 +1,170 @@
+name: Autograding Tests
+on:
+  - push
+  - repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: [self-hosted, oracle]
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+        cache: 'npm'
+    - name: Install dependencies
+      run: npm install
+    - name: Ej7 HTML
+      id: ej7-html
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Ej7 HTML
+        setup-command: ''
+        command: npm test -- tests/ejercicio/7-api-json.test.js -t "Estructura HTML"
+        timeout: 30
+        max-score: 15
+      continue-on-error: true
+    - name: Ej7 Funciones
+      id: ej7-funciones
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Ej7 Funciones
+        setup-command: ''
+        command: npm test -- tests/ejercicio/7-api-json.test.js -t "Funciones JavaScript"
+        timeout: 30
+        max-score: 15
+      continue-on-error: true
+    - name: Ej7 Fetch
+      id: ej7-fetch
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Ej7 Fetch
+        setup-command: ''
+        command: npm test -- tests/ejercicio/7-api-json.test.js -t "Uso de Fetch"
+        timeout: 30
+        max-score: 15
+      continue-on-error: true
+    - name: Ej7 Obtener
+      id: ej7-obtener
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Ej7 Obtener
+        setup-command: ''
+        command: npm test -- tests/ejercicio/7-api-json.test.js -t "obtenerProductos"
+        timeout: 30
+        max-score: 15
+      continue-on-error: true
+    - name: Ej7 Catalogo
+      id: ej7-catalogo
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Ej7 Catalogo
+        setup-command: ''
+        command: npm test -- tests/ejercicio/7-api-json.test.js -t "mostrarCatalogo"
+        timeout: 30
+        max-score: 15
+      continue-on-error: true
+    - name: Ej7 Ofertas
+      id: ej7-ofertas
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Ej7 Ofertas
+        setup-command: ''
+        command: npm test -- tests/ejercicio/7-api-json.test.js -t "mostrarOfertas"
+        timeout: 30
+        max-score: 12
+      continue-on-error: true
+    - name: Ej7 Carrusel
+      id: ej7-carrusel
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Ej7 Carrusel
+        setup-command: ''
+        command: npm test -- tests/ejercicio/7-api-json.test.js -t "mostrarCarrusel"
+        timeout: 30
+        max-score: 11
+      continue-on-error: true
+    - name: Ej7 Detalles
+      id: ej7-detalles
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Ej7 Detalles
+        setup-command: ''
+        command: npm test -- tests/ejercicio/7-api-json.test.js -t "mostrarDetalles"
+        timeout: 30
+        max-score: 11
+      continue-on-error: true
+    - name: Ej7 Init
+      id: ej7-init
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Ej7 Init
+        setup-command: ''
+        command: npm test -- tests/ejercicio/7-api-json.test.js -t "Inicializacion"
+        timeout: 30
+        max-score: 11
+      continue-on-error: true
+    - name: Ej8 Archivo
+      id: ej8-archivo
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Ej8 Archivo
+        setup-command: ''
+        command: npm test -- tests/ejercicio/8-netlify.test.js -t "Archivo my-page"
+        timeout: 30
+        max-score: 20
+      continue-on-error: true
+    - name: Ej8 Acceso
+      id: ej8-acceso
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Ej8 Acceso
+        setup-command: ''
+        command: npm test -- tests/ejercicio/8-netlify.test.js -t "Accesibilidad"
+        timeout: 20
+        max-score: 20
+      continue-on-error: true
+    - name: Ej8 Contenido
+      id: ej8-contenido
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Ej8 Contenido
+        setup-command: ''
+        command: npm test -- tests/ejercicio/8-netlify.test.js -t "Contenido del Sitio"
+        timeout: 15
+        max-score: 20
+      continue-on-error: true
+    - name: Ej8 Estructura
+      id: ej8-estructura
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Ej8 Estructura
+        setup-command: ''
+        command: npm test -- tests/ejercicio/8-netlify.test.js -t "Estructura del Proyecto"
+        timeout: 30
+        max-score: 20
+      continue-on-error: true
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        EJ7-HTML_RESULTS: "${{steps.ej7-html.outputs.result}}"
+        EJ7-FUNCIONES_RESULTS: "${{steps.ej7-funciones.outputs.result}}"
+        EJ7-FETCH_RESULTS: "${{steps.ej7-fetch.outputs.result}}"
+        EJ7-OBTENER_RESULTS: "${{steps.ej7-obtener.outputs.result}}"
+        EJ7-CATALOGO_RESULTS: "${{steps.ej7-catalogo.outputs.result}}"
+        EJ7-OFERTAS_RESULTS: "${{steps.ej7-ofertas.outputs.result}}"
+        EJ7-CARRUSEL_RESULTS: "${{steps.ej7-carrusel.outputs.result}}"
+        EJ7-DETALLES_RESULTS: "${{steps.ej7-detalles.outputs.result}}"
+        EJ7-INIT_RESULTS: "${{steps.ej7-init.outputs.result}}"
+        EJ8-ARCHIVO_RESULTS: "${{steps.ej8-archivo.outputs.result}}"
+        EJ8-ACCESO_RESULTS: "${{steps.ej8-acceso.outputs.result}}"
+        EJ8-CONTENIDO_RESULTS: "${{steps.ej8-contenido.outputs.result}}"
+        EJ8-ESTRUCTURA_RESULTS: "${{steps.ej8-estructura.outputs.result}}"
+      with:
+        runners: ej7-html,ej7-funciones,ej7-fetch,ej7-obtener,ej7-catalogo,ej7-ofertas,ej7-carrusel,ej7-detalles,ej7-init,ej8-archivo,ej8-acceso,ej8-contenido,ej8-estructura
